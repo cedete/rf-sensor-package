@@ -1,0 +1,9 @@
+#ifndef BOARD_SYSTEM_HPP
+#define BOARD_SYSTEM_HPP
+
+namespace STM32WL55JC1
+{
+
+} // namespace STM32WL55JC1
+
+#endif BOARD_SYSTEM_HPP

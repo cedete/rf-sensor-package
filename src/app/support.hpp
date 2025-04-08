@@ -14,7 +14,7 @@ namespace Sensor_Package
     // Configurations for application peripherals 
     //
 
-    struct GPIO::Config led1_config
+    const GPIO::Config led1_config
     {
         GPIO::Port::B,
         GPIO::Pin::P15,
@@ -25,7 +25,7 @@ namespace Sensor_Package
         GPIO::Function::AF0
     };
 
-    struct GPIO::Config pb12_config
+    const GPIO::Config pb12_config
     {
         GPIO::Port::B,
         GPIO::Pin::P12,
@@ -36,7 +36,7 @@ namespace Sensor_Package
         GPIO::Function::AF0
     };
 
-    struct UART::Config usart1_config
+    const UART::Config usart1_config
     {
         UART::Instance::USART_1,
         GPIO::Port::B,  // tx
@@ -47,7 +47,7 @@ namespace Sensor_Package
         9600
     };
 
-    struct UART::Config usart2_config
+    const UART::Config usart2_config
     {
         UART::Instance::USART_2,
         GPIO::Port::A,  // tx
@@ -58,7 +58,7 @@ namespace Sensor_Package
         115200
     };
 
-    struct SPI::Config spi1_config
+    const SPI::Config spi1_config
     {
         SPI::Instance::SPI_1,
         GPIO::Port::A,
@@ -74,10 +74,25 @@ namespace Sensor_Package
         SPI::Frame::MSB_FIRST,
     };
 
+    const SUBGHZ::Config radio_config = 
+    {
+        SUBGHZ::Radio::Packet::LORA,
+        255,        // packet length
+        SUBGHZ::Lora::Header::IMPLICIT_FIXED_LENGTH,
+        255,        // header number of symbols
+        SUBGHZ::Lora::Spread::FACTOR_7,
+        SUBGHZ::Lora::Bandwidth::BW_125,
+        SUBGHZ::Lora::Coding::RATE_4_5,
+        SUBGHZ::Radio::PA::Power::HP_PLUS_17_DBM,
+        SUBGHZ::Radio::Ramp::TIME_800_US,
+        SUBGHZ::Radio::PA::HP_PLUS_17_DBM_SETTING,
+        915000000   // frequency
+    };
+
     // 
     // Static instances of used peripherals
     //
-
+/*
     // LED for debugging
     GPIO::Output& led1()
     {
@@ -85,6 +100,7 @@ namespace Sensor_Package
 
         return obj;
     }
+*/
     
     // SPI chip select 
     GPIO::Output& pb12()

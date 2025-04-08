@@ -53,7 +53,7 @@ namespace Sensor_Package
 
         ~GPS();
 
-        void transfer_data(Ring_Buffer<uint8_t, 100>& buffer);
+        void transfer_data(Ring_Buffer<uint8_t, 255>& buffer);
 
         Status status();
 

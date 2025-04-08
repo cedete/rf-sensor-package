@@ -2,6 +2,7 @@
 #define BOARD_BOARD_HPP
 
 #include <cstdint>
+#include <array>
 
 #include "../CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
 
@@ -155,6 +156,28 @@ namespace STM32WL55JC1
 
         // UART configuration struct
 
+        //T0D0: redo this
+        /*
+        struct Config
+        {
+        #ifdef UNIT_TEST
+            uintptr_t      uart;
+            uintptr_t      tx_port;
+            GPIO::Pin      tx_pin;
+            uintptr_t      rx_port;
+            GPIO::Pin      rx_pin;
+        #else
+            Instance       uart; 
+            GPIO::Port     tx_port;
+            GPIO::Pin      tx_pin;
+            GPIO::Port     rx_port;
+            GPIO::Pin      rx_pin;
+        #endif // UNIT_TEST
+            Mode           mode;
+            uint32_t       baud_rate;
+        }; 
+        */
+
         struct Config
         {
         #ifdef UNIT_TEST
@@ -272,47 +295,179 @@ namespace STM32WL55JC1
         // SUBGHZ configuration settings
         //
 
-        enum class Bandwidth : uint8_t
+        namespace Radio
         {
-        };
+            enum class Packet : uint8_t
+            {
+                GFSK = 0x00,  
+                LORA = 0x01,
+                BPSK = 0x02,
+                GMSK = 0x03,
+                NONE = 0x0F
+            };
 
-        enum class Spread : uint8_t
+            enum class Ramp : uint8_t 
+            {
+                TIME_10_US   = 0x00,
+                TIME_20_US   = 0x01,
+                TIME_40_US   = 0x02,
+                TIME_80_US   = 0x03,
+                TIME_200_US  = 0x04,
+                TIME_800_US  = 0x05,
+                TIME_1700_US = 0x06,
+                TIME_3400_US = 0x07
+            };
+
+            enum class Preamble : uint8_t
+            {
+                DETECTOR_OFF     = 0x00,
+                DETECTOR_08_BITS = 0x04,
+                DETECTOR_16_BITS = 0x05,
+                DETECTOR_24_BITS = 0x06,
+                DETECTOR_32_BITS = 0x07
+            };
+
+            namespace PA
+            {
+                enum class Power : uint8_t
+                {
+                    LP_PLUS_15_DBM = 0x0E,
+                    LP_PLUS_14_DBM = 0x0E,
+                    LP_PLUS_10_DBM = 0x0D,
+                    HP_PLUS_22_DBM = 0x16,
+                    HP_PLUS_20_DBM = 0x16,
+                    HP_PLUS_17_DBM = 0x16,
+                    HP_PLUS_14_DBM = 0x16
+                };
+    
+                // indexes for PA config array
+                static constexpr uint8_t DUTY_CYCLE = 0;
+                static constexpr uint8_t HP_MAX     = 1;
+                static constexpr uint8_t SEL        = 2;
+
+                // PA config array
+                static constexpr std::array<uint8_t, 3> LP_PLUS_15_DBM_SETTING = {0x7, 0x0, 0x1};
+                static constexpr std::array<uint8_t, 3> LP_PLUS_14_DBM_SETTING = {0x4, 0x0, 0x1};
+                static constexpr std::array<uint8_t, 3> LP_PLUS_10_DBM_SETTING = {0x1, 0x0, 0x1};
+                static constexpr std::array<uint8_t, 3> HP_PLUS_22_DBM_SETTING = {0x4, 0x7, 0x0};
+                static constexpr std::array<uint8_t, 3> HP_PLUS_20_DBM_SETTING = {0x3, 0x5, 0x0};
+                static constexpr std::array<uint8_t, 3> HP_PLUS_17_DBM_SETTING = {0x2, 0x3, 0x0};
+                static constexpr std::array<uint8_t, 3> HP_PLUS_14_DBM_SETTING = {0x2, 0x2, 0x0};
+
+            } // namespace PA
+
+            enum class TCXO : uint8_t
+            {
+                TRIM_1_6_V = 0x0,
+                TRIM_1_7_V = 0x1,
+                TRIM_1_8_V = 0x2,
+                TRIM_2_2_V = 0x3,
+                TRIM_2_4_V = 0x4,
+                TRIM_2_7_V = 0x5,
+                TRIM_3_0_V = 0x6,
+                TRIM_3_3_V = 0x7
+            };
+
+        } // namespace Radio
+
+        namespace Gfsk
         {
-            FACTOR_10_PS,
-            FACTOR_20_PS,
-            FACTOR_40_PS,
-            FACTOR_80_PS,
-            FACTOR_200_PS,
-            FACTOR_800_PS,
-            FACTOR_1700_PS,
-            FACTOR_3400_PS
-        };
+            //T0D0
 
-        enum class Power : uint8_t
+        }; // namespace Gfsk
+
+        namespace Lora
         {
-        };
+            enum class Spread : uint8_t
+            {
+                FACTOR_5  = 0x05,
+                FACTOR_6  = 0x06,
+                FACTOR_7  = 0x07,
+                FACTOR_8  = 0x08,
+                FACTOR_9  = 0x09,
+                FACTOR_10 = 0x0A,
+                FACTOR_11 = 0x0B,
+                FACTOR_12 = 0x0C
+            };
 
-        enum class Ramp_Time : uint8_t 
+            enum class Bandwidth : uint8_t
+            {
+                BW_500 = 6,
+                BW_250 = 5,
+                BW_125 = 4,
+                BW_062 = 3,
+                BW_041 = 10,
+                BW_031 = 2,
+                BW_020 = 9,
+                BW_015 = 1,
+                BW_010 = 8,
+                BW_007 = 0,
+            };
+
+            enum class Coding : uint8_t
+            {
+                RATE_4_5 = 0x01,
+                RATE_4_6 = 0x02,
+                RATE_4_7 = 0x03,
+                RATE_4_8 = 0x04,
+            };
+
+            enum class LDRO : uint8_t
+            {
+                DISABLE = 0x0,
+                ENABLE  = 0x1
+            };
+
+            enum class Header : uint8_t
+            {
+                EXPLICIT_VARIABLE_LENGTH = 0x0,
+                IMPLICIT_FIXED_LENGTH    = 0x1  
+            };
+
+            enum class CRC_Type : uint8_t 
+            {
+                DISABLE = 0x0,
+                ENABLE  = 0x1
+            };
+   
+            enum class Invert_IQ : uint8_t
+            {
+                STANDARD = 0x0,
+                INVERTED = 0x1
+            }; 
+
+        } // namespace Lora
+
+        namespace Bpsk
         {
-        };
+            //T0D0
 
-        enum class Packet : uint8_t
+        } // namespace Bpsk
+
+        namespace Gmsk
         {
-            FSK,  
-            LORA,
-            BPSK,
-            MSK
-        };
+            //T0D0
 
-        enum class Frame : uint8_t
-        {
-        };
-
+        } // namespace Gmsk
+       
         // SUBGHZ configuration struct
-
+        
         struct Config
         {
-            // these will be hardcoded for now
+            Radio::Packet          packet_type;
+            uint8_t                packet_length;
+            Lora::Header           header_type;
+            uint16_t               header_length;        
+
+            Lora::Spread           spread_factor;
+            Lora::Bandwidth        bandwidth;
+            Lora::Coding           coding_rate;
+
+            Radio::PA::Power       power; 
+            Radio::Ramp            ramp_time;
+            std::array<uint8_t, 3> pa_config;
+
+            uint32_t               frequency;       
         };
     
     } // namespace SUBGHZ

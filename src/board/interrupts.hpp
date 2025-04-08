@@ -30,6 +30,8 @@ namespace STM32WL55JC1
     {
         static Interrupt_Handler& irq_handler(UART::Instance uart);
 
+        static Interrupt_Handler& irq_handler();
+
         // create other instances that have different TypeDef parameters
     };
 

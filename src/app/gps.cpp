@@ -13,7 +13,7 @@ GPS::~GPS()
     // peripheral constructors take care of resetting peripheral states
 }
 
-void GPS::transfer_data(Ring_Buffer<uint8_t, 100>& buffer)
+void GPS::transfer_data(Ring_Buffer<uint8_t, 255>& buffer)
 {
     gps_status = NOT_DONE;
 

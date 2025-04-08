@@ -18,7 +18,7 @@ namespace Test
         ~Terminal()
         {}
     
-        void print(Ring_Buffer<uint8_t, 100>& buffer)
+        void print(Ring_Buffer<uint8_t, 255>& buffer)
         {
             while (!(buffer.empty())) 
             {

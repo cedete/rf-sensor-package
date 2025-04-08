@@ -30,7 +30,7 @@ void RF_Meter::read()
     }
 }
 
-void RF_Meter::transfer_data(Ring_Buffer<uint8_t, 100>& buffer)
+void RF_Meter::transfer_data(Ring_Buffer<uint8_t, 255>& buffer)
 {
     while (!data_buffer.empty())  
     {

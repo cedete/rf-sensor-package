@@ -43,7 +43,7 @@ namespace Sensor_Package
 
         void read();
 
-        void transfer_data(Ring_Buffer<uint8_t, 100>& buffer);
+        void transfer_data(Ring_Buffer<uint8_t, 255>& buffer);
 
         Ring_Buffer<uint8_t, 25>& get_formatted_data();  // array of chars
         uint16_t get_raw_data() const;                  // integer value

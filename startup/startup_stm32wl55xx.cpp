@@ -53,7 +53,6 @@ extern "C"
     void EXTI2_IRQHandler()                  __attribute__ ((weak, alias("Default_Handler")));
     void EXTI3_IRQHandler()                  __attribute__ ((weak, alias("Default_Handler")));
     void EXTI4_IRQHandler()                  __attribute__ ((weak, alias("Default_Handler")));
-    void DMA1_Channel0_IRQHandler()          __attribute__ ((weak, alias("Default_Handler")));
     void DMA1_Channel1_IRQHandler()          __attribute__ ((weak, alias("Default_Handler")));
     void DMA1_Channel2_IRQHandler()          __attribute__ ((weak, alias("Default_Handler")));
     void DMA1_Channel3_IRQHandler()          __attribute__ ((weak, alias("Default_Handler")));
@@ -71,7 +70,6 @@ extern "C"
     void TIM1_TRG_COM_IRQHandler()           __attribute__ ((weak, alias("Default_Handler")));
     void TIM1_CC_IRQHandler()                __attribute__ ((weak, alias("Default_Handler")));
     void TIM2_IRQHandler()                   __attribute__ ((weak, alias("Default_Handler")));
-    void TIM3_IRQHandler()                   __attribute__ ((weak, alias("Default_Handler")));
     void TIM16_IRQHandler()                  __attribute__ ((weak, alias("Default_Handler")));
     void TIM17_IRQHandler()                  __attribute__ ((weak, alias("Default_Handler")));
     void I2C1_EV_IRQHandler()                __attribute__ ((weak, alias("Default_Handler")));
@@ -94,7 +92,7 @@ extern "C"
     void HSEM_IRQHandler()                   __attribute__ ((weak, alias("Default_Handler")));
     void I2C3_EV_IRQHandler()                __attribute__ ((weak, alias("Default_Handler")));
     void I2C3_ER_IRQHandler()                __attribute__ ((weak, alias("Default_Handler")));
-    void SUBGHZ_Radio__IRQHandler()          __attribute__ ((weak, alias("Default_Handler")));
+    void SUBGHZ_Radio_IRQHandler()           __attribute__ ((weak, alias("Default_Handler")));
     void AES_IRQHandler()                    __attribute__ ((weak, alias("Default_Handler")));
     void RNG_IRQHandler()                    __attribute__ ((weak, alias("Default_Handler")));
     void PKA_IRQHandler()                    __attribute__ ((weak, alias("Default_Handler")));
@@ -188,7 +186,7 @@ extern "C"
         (uint32_t)&HSEM_IRQHandler,               
         (uint32_t)&I2C3_EV_IRQHandler,           
         (uint32_t)&I2C3_ER_IRQHandler,          
-        (uint32_t)&SUBGHZ_Radio__IRQHandler,     
+        (uint32_t)&SUBGHZ_Radio_IRQHandler,
         (uint32_t)&AES_IRQHandler,                   
         (uint32_t)&RNG_IRQHandler,                  
         (uint32_t)&PKA_IRQHandler,                 
